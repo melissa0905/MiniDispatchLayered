@@ -1,0 +1,78 @@
+@model IReadOnlyList<MiniDispatch.Application.Shipments.Queries.GetShipments.ShipmentListItemDto>
+
+@{
+    ViewData["Title"] = "Sevkiyatlar";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3 mb-0">Sevkiyatlar</h1>
+</div>
+
+<div class="d-flex gap-2 mb-4">
+    <a asp-controller="Shipments"
+       asp-action="Index"
+       class="btn btn-outline-secondary">
+        Tümü
+    </a>
+
+    <a asp-controller="Shipments"
+       asp-action="Index"
+       asp-route-status="Created"
+       class="btn btn-outline-primary">
+        Oluşturuldu
+    </a>
+
+    <a asp-controller="Shipments"
+       asp-action="Index"
+       asp-route-status="InTransit"
+       class="btn btn-outline-warning">
+        Yolda
+    </a>
+
+    <a asp-controller="Shipments"
+       asp-action="Index"
+       asp-route-status="Delivered"
+       class="btn btn-outline-success">
+        Teslim edildi
+    </a>
+</div>
+
+<div class="card shadow-sm">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Referans</th>
+                    <th>Çıkış</th>
+                    <th>Varış</th>
+                    <th>Plaka</th>
+                    <th>Durum</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Count == 0)
+                {
+                    <tr>
+                        <td colspan="5"
+                            class="text-center text-muted py-4">
+                            Sevkiyat bulunamadı.
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    @foreach (var shipment in Model)
+                    {
+                        <tr>
+                            <td>@shipment.ReferenceNumber</td>
+                            <td>@shipment.Origin</td>
+                            <td>@shipment.Destination</td>
+                            <td>@shipment.VehiclePlate</td>
+                            <td>@shipment.Status</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
