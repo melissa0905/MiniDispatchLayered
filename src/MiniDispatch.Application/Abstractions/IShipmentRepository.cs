@@ -21,5 +21,6 @@ namespace MiniDispatch.Application.Abstractions
             CancellationToken cancellationToken);
 
         Task SaveChangesAsync(CancellationToken cancellationToken);
+        Task<Shipment?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
     }
 }

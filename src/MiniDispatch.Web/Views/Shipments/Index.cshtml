@@ -1,3 +1,4 @@
+@using MiniDispatch.Domain.Enums
 @model IReadOnlyList<MiniDispatch.Application.Shipments.Queries.GetShipments.ShipmentListItemDto>
 
 @{
@@ -6,10 +7,14 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h1 class="h3 mb-0">Sevkiyatlar</h1>
-    <a asp-controller="Shipments" asp-action="Create" class="btn btn-primary">
+
+    <a asp-controller="Shipments"
+       asp-action="Create"
+       class="btn btn-primary">
         Yeni sevkiyat
     </a>
 </div>
+
 @if (TempData["SuccessMessage"] is string successMessage)
 {
     <div class="alert alert-success" role="alert">
@@ -17,20 +22,38 @@
     </div>
 }
 
-<div class="d-flex gap-2 mb-4">
-    <a asp-controller="Shipments" asp-action="Index" class="btn btn-outline-secondary">
+@if (TempData["ErrorMessage"] is string errorMessage)
+{
+    <div class="alert alert-danger" role="alert">
+        @errorMessage
+    </div>
+}
+
+<div class="d-flex flex-wrap gap-2 mb-4">
+    <a asp-controller="Shipments"
+       asp-action="Index"
+       class="btn btn-outline-secondary">
         Tümü
     </a>
 
-    <a asp-controller="Shipments" asp-action="Index" asp-route-status="Created" class="btn btn-outline-primary">
+    <a asp-controller="Shipments"
+       asp-action="Index"
+       asp-route-status="Created"
+       class="btn btn-outline-primary">
         Oluşturuldu
     </a>
 
-    <a asp-controller="Shipments" asp-action="Index" asp-route-status="InTransit" class="btn btn-outline-warning">
+    <a asp-controller="Shipments"
+       asp-action="Index"
+       asp-route-status="InTransit"
+       class="btn btn-outline-warning">
         Yolda
     </a>
 
-    <a asp-controller="Shipments" asp-action="Index" asp-route-status="Delivered" class="btn btn-outline-success">
+    <a asp-controller="Shipments"
+       asp-action="Index"
+       asp-route-status="Delivered"
+       class="btn btn-outline-success">
         Teslim edildi
     </a>
 </div>
@@ -45,13 +68,16 @@
                     <th>Varış</th>
                     <th>Plaka</th>
                     <th>Durum</th>
+                    <th>İşlem</th>
                 </tr>
             </thead>
+
             <tbody>
                 @if (Model.Count == 0)
                 {
                     <tr>
-                        <td colspan="5" class="text-center text-muted py-4">
+                        <td colspan="6"
+                            class="text-center text-muted py-4">
                             Sevkiyat bulunamadı.
                         </td>
                     </tr>
@@ -65,7 +91,78 @@
                             <td>@shipment.Origin</td>
                             <td>@shipment.Destination</td>
                             <td>@shipment.VehiclePlate</td>
-                            <td>@shipment.Status</td>
+
+                            <td>
+                                @switch (shipment.Status)
+                                {
+                                    case ShipmentStatus.Created:
+                                        <span class="badge bg-primary">
+                                            Oluşturuldu
+                                        </span>
+                                        break;
+
+                                    case ShipmentStatus.InTransit:
+                                        <span class="badge bg-warning text-dark">
+                                            Yolda
+                                        </span>
+                                        break;
+
+                                    case ShipmentStatus.Delivered:
+                                        <span class="badge bg-success">
+                                            Teslim edildi
+                                        </span>
+                                        break;
+                                }
+                            </td>
+
+                            <td>
+                                @if (shipment.Status == ShipmentStatus.Created)
+                                {
+                                    <form asp-controller="Shipments"
+                                          asp-action="ChangeStatus"
+                                          method="post">
+
+                                        <input type="hidden"
+                                               name="id"
+                                               value="@shipment.Id" />
+
+                                        <input type="hidden"
+                                               name="status"
+                                               value="InTransit" />
+
+                                        <button type="submit"
+                                                class="btn btn-sm btn-outline-warning">
+                                            Yola çıkar
+                                        </button>
+                                    </form>
+                                }
+                                else if (shipment.Status == ShipmentStatus.InTransit)
+                                {
+                                    <form asp-controller="Shipments"
+                                          asp-action="ChangeStatus"
+                                          method="post">
+
+                                        <input type="hidden"
+                                               name="id"
+                                               value="@shipment.Id" />
+
+                                        <input type="hidden"
+                                               name="status"
+                                               value="Delivered" />
+
+                                        <button type="submit"
+                                                class="btn btn-sm btn-outline-success">
+                                            Teslim et
+                                        </button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">
+                                        Tamamlandı
+                                    </span>
+                                }
+                            </td>
                         </tr>
                     }
                 }

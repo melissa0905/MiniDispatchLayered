@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using MiniDispatch.Application.Shipments.Commands.ChangeShipmentStatus;
 using MiniDispatch.Application.Shipments.Commands.CreateShipment;
 using MiniDispatch.Application.Shipments.Queries.GetShipments;
 using MiniDispatch.Domain.Enums;
@@ -36,7 +31,7 @@ namespace MiniDispatch.Web.Controllers
 
             return View(shipments);
         }
-    
+
         [HttpGet]
         public IActionResult Create()
         {
@@ -69,5 +64,37 @@ namespace MiniDispatch.Web.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangeStatus(Guid id,ShipmentStatus status,CancellationToken cancellationToken)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                await sender.Send(
+                    new ChangeShipmentStatusCommand(id, status),
+                    cancellationToken);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound("Sevkiyat bulunamadı.");
+            }
+            catch (ValidationException exception)
+            {
+                TempData["ErrorMessage"] = exception.Message;
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            TempData["SuccessMessage"] =
+                "Sevkiyat durumu başarıyla güncellendi.";
+
+            return RedirectToAction(nameof(Index));
+        }
     }
+
 }

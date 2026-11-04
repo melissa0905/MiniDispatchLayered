@@ -17,6 +17,13 @@ namespace MiniDispatch.Infrastructure.Repositories
             await dbContext.Shipments.AddAsync(shipment, cancellationToken);
         }
 
+        public async Task<Shipment?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+        {
+            return await dbContext.Shipments
+             .AsTracking()
+             .FirstOrDefaultAsync(x => x.Id == id,cancellationToken);
+        }
+
         public async Task<IReadOnlyList<Shipment>> GetListAsync(ShipmentStatus? status, CancellationToken cancellationToken)
         {
             var query = dbContext.Shipments
