@@ -194,3 +194,4 @@ C:\Users\melis\projects\MiniDispatchLayered\src\MiniDispatch.Web\obj\Debug\net10
 C:\Users\melis\projects\MiniDispatchLayered\src\MiniDispatch.Web\obj\Debug\net10.0\MiniDispatch.Web.pdb
 C:\Users\melis\projects\MiniDispatchLayered\src\MiniDispatch.Web\obj\Debug\net10.0\MiniDispatch.Web.genruntimeconfig.cache
 C:\Users\melis\projects\MiniDispatchLayered\src\MiniDispatch.Web\obj\Debug\net10.0\ref\MiniDispatch.Web.dll
+C:\Users\melis\projects\MiniDispatchLayered\src\MiniDispatch.Web\obj\Debug\net10.0\MiniDispatch.Web.sourcelink.json

@@ -13,3 +13,4 @@ C:\Users\melis\projects\MiniDispatchLayered\src\MiniDispatch.Application\obj\Deb
 C:\Users\melis\projects\MiniDispatchLayered\src\MiniDispatch.Application\obj\Debug\net10.0\refint\MiniDispatch.Application.dll
 C:\Users\melis\projects\MiniDispatchLayered\src\MiniDispatch.Application\obj\Debug\net10.0\MiniDispatch.Application.pdb
 C:\Users\melis\projects\MiniDispatchLayered\src\MiniDispatch.Application\obj\Debug\net10.0\ref\MiniDispatch.Application.dll
+C:\Users\melis\projects\MiniDispatchLayered\src\MiniDispatch.Application\obj\Debug\net10.0\MiniDispatch.Application.sourcelink.json

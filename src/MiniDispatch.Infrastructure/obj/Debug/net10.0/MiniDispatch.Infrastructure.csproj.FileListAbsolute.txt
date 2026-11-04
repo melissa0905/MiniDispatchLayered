@@ -15,3 +15,4 @@ C:\Users\melis\projects\MiniDispatchLayered\src\MiniDispatch.Infrastructure\obj\
 C:\Users\melis\projects\MiniDispatchLayered\src\MiniDispatch.Infrastructure\obj\Debug\net10.0\refint\MiniDispatch.Infrastructure.dll
 C:\Users\melis\projects\MiniDispatchLayered\src\MiniDispatch.Infrastructure\obj\Debug\net10.0\MiniDispatch.Infrastructure.pdb
 C:\Users\melis\projects\MiniDispatchLayered\src\MiniDispatch.Infrastructure\obj\Debug\net10.0\ref\MiniDispatch.Infrastructure.dll
+C:\Users\melis\projects\MiniDispatchLayered\src\MiniDispatch.Infrastructure\obj\Debug\net10.0\MiniDispatch.Infrastructure.sourcelink.json

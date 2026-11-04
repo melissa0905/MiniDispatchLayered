@@ -1,0 +1,98 @@
+@model MiniDispatch.Application.Shipments.Commands.CreateShipment.CreateShipmentCommand
+
+@{
+    ViewData["Title"] = "Yeni Sevkiyat";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <div class="card shadow-sm">
+            <div class="card-header bg-white py-3">
+                <h1 class="h4 mb-0">Yeni Sevkiyat</h1>
+            </div>
+
+            <div class="card-body">
+                <form asp-controller="Shipments"
+                      asp-action="Create"
+                      method="post">
+
+                    <div asp-validation-summary="ModelOnly"
+                         class="text-danger mb-3"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="ReferenceNumber"
+                               class="form-label">
+                            Referans numarası
+                        </label>
+
+                        <input asp-for="ReferenceNumber"
+                               class="form-control"
+                               placeholder="SHP-1002" />
+
+                        <span asp-validation-for="ReferenceNumber"
+                              class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Origin"
+                               class="form-label">
+                            Çıkış noktası
+                        </label>
+
+                        <input asp-for="Origin"
+                               class="form-control"
+                               placeholder="İstanbul" />
+
+                        <span asp-validation-for="Origin"
+                              class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Destination"
+                               class="form-label">
+                            Varış noktası
+                        </label>
+
+                        <input asp-for="Destination"
+                               class="form-control"
+                               placeholder="Ankara" />
+
+                        <span asp-validation-for="Destination"
+                              class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="VehiclePlate"
+                               class="form-label">
+                            Araç plakası
+                        </label>
+
+                        <input asp-for="VehiclePlate"
+                               class="form-control"
+                               placeholder="34 ABC 123" />
+
+                        <span asp-validation-for="VehiclePlate"
+                              class="text-danger"></span>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit"
+                                class="btn btn-primary">
+                            Kaydet
+                        </button>
+
+                        <a asp-controller="Shipments"
+                           asp-action="Index"
+                           class="btn btn-outline-secondary">
+                            Listeye dön
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

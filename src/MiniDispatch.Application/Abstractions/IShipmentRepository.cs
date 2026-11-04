@@ -12,5 +12,14 @@ namespace MiniDispatch.Application.Abstractions
         Task<IReadOnlyList<Shipment>> GetListAsync(
        ShipmentStatus? status,
        CancellationToken cancellationToken);
+        Task<bool> ReferenceNumberExistsAsync(
+       string referenceNumber,
+       CancellationToken cancellationToken);
+
+        Task AddAsync(
+            Shipment shipment,
+            CancellationToken cancellationToken);
+
+        Task SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

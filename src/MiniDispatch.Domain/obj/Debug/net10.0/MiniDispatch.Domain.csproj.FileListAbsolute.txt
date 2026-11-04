@@ -9,3 +9,4 @@ C:\Users\melis\projects\MiniDispatchLayered\src\MiniDispatch.Domain\obj\Debug\ne
 C:\Users\melis\projects\MiniDispatchLayered\src\MiniDispatch.Domain\obj\Debug\net10.0\refint\MiniDispatch.Domain.dll
 C:\Users\melis\projects\MiniDispatchLayered\src\MiniDispatch.Domain\obj\Debug\net10.0\MiniDispatch.Domain.pdb
 C:\Users\melis\projects\MiniDispatchLayered\src\MiniDispatch.Domain\obj\Debug\net10.0\ref\MiniDispatch.Domain.dll
+C:\Users\melis\projects\MiniDispatchLayered\src\MiniDispatch.Domain\obj\Debug\net10.0\MiniDispatch.Domain.sourcelink.json
