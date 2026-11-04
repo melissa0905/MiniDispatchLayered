@@ -89,8 +89,8 @@ The browser retries failed connections and table requests. After reconnecting, i
 ### Try it in two tabs
 
 1. Start the application and open the shipment list in two tabs.
-2. Confirm that both show **Canlı güncelleme etkin.** below the table.
-3. Create a shipment, then use **Yola çıkar** to move it to `InTransit`.
+2. Confirm that both show **.** below the table.
+3. Create a shipment, then use **** to move it to `InTransit`.
 4. The other tab should update without a page reload. If it is filtered to `Created`, the shipment should disappear; if filtered to `InTransit`, it should appear.
 5. Use **Teslim et** to move an in-transit shipment to `Delivered`.
 
