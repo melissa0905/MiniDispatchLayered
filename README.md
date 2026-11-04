@@ -89,10 +89,10 @@ The browser retries failed connections and table requests. After reconnecting, i
 ### Try it in two tabs
 
 1. Start the application and open the shipment list in two tabs.
-2. Confirm that both show **.** below the table.
-3. Create a shipment, then use **** to move it to `InTransit`.
+2. Confirm that both tabs show **Canlı güncelleme etkin.** (Live updates enabled) below the table.
+3. Click **Yeni sevkiyat** (New shipment), complete the form, and click **Kaydet** (Save). Then click **Yola çıkar** (Start transit) in the shipment list to move the shipment to `InTransit`.
 4. The other tab should update without a page reload. If it is filtered to `Created`, the shipment should disappear; if filtered to `InTransit`, it should appear.
-5. Use **Teslim et** to move an in-transit shipment to `Delivered`.
+5. Click **Teslim et** (Mark as delivered) to move an in-transit shipment to `Delivered`.
 
 Tabs opened before the SignalR scripts were added need an initial reload to load those scripts.
 
