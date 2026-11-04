@@ -10,7 +10,8 @@ using MiniDispatch.Domain.Enums;
 namespace MiniDispatch.Application.Shipments.Commands.ChangeShipmentStatus
 {
     public class ChangeShipmentStatusCommandHandler(
-    IShipmentRepository shipmentRepository)
+    IShipmentRepository shipmentRepository,
+    IShipmentNotifier shipmentNotifier)
     : IRequestHandler<ChangeShipmentStatusCommand>
     {
         
@@ -61,6 +62,8 @@ namespace MiniDispatch.Application.Shipments.Commands.ChangeShipmentStatus
 
         await shipmentRepository.SaveChangesAsync(
             cancellationToken);
+
+        await shipmentNotifier.ShipmentsChangedAsync(CancellationToken.None);
     }
     }
 }

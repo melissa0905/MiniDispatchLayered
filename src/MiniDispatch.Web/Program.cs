@@ -1,9 +1,14 @@
 using MiniDispatch.Application;
+using MiniDispatch.Application.Abstractions;
 using MiniDispatch.Infrastructure;
+using MiniDispatch.Web.Hubs;
+using MiniDispatch.Web.Notifications;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddSignalR();
+builder.Services.AddScoped<IShipmentNotifier, SignalRShipmentNotifier>();
 
 builder.Services.AddApplication();
 
@@ -27,6 +32,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapStaticAssets();
+app.MapHub<ShipmentsHub>("/hubs/shipments");
 
 app.MapControllerRoute(
         name: "default",

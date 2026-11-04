@@ -33,6 +33,26 @@ namespace MiniDispatch.Web.Controllers
         }
 
         [HttpGet]
+        [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
+        public async Task<IActionResult> Table(
+            ShipmentStatus? status,
+            CancellationToken cancellationToken)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (status.HasValue && !Enum.IsDefined(status.Value))
+            {
+                return BadRequest("Geçersiz sevkiyat durumu.");
+            }
+
+            var shipments = await sender.Send(new GetShipmentsQuery(status), cancellationToken);
+            return PartialView("_ShipmentsTable", shipments);
+        }
+
+        [HttpGet]
         public IActionResult Create()
         {
             return View(new CreateShipmentCommand());

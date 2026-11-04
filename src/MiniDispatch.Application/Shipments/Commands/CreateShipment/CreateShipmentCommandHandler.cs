@@ -9,7 +9,9 @@ using MiniDispatch.Domain.Entities;
 
 namespace MiniDispatch.Application.Shipments.Commands.CreateShipment
 {
-    public class CreateShipmentCommandHandler(IShipmentRepository shipmentRepository) : IRequestHandler<CreateShipmentCommand, Guid>
+    public class CreateShipmentCommandHandler(
+        IShipmentRepository shipmentRepository,
+        IShipmentNotifier shipmentNotifier) : IRequestHandler<CreateShipmentCommand, Guid>
     {
         public async Task<Guid> Handle(CreateShipmentCommand request, CancellationToken cancellationToken)
         {
@@ -43,6 +45,8 @@ namespace MiniDispatch.Application.Shipments.Commands.CreateShipment
 
             await shipmentRepository.SaveChangesAsync(
                 cancellationToken);
+
+            await shipmentNotifier.ShipmentsChangedAsync(CancellationToken.None);
 
             return shipment.Id;
         }

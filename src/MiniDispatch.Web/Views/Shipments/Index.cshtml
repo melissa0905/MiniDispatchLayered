@@ -58,115 +58,14 @@
     </a>
 </div>
 
-<div class="card shadow-sm">
-    <div class="table-responsive">
-        <table class="table table-hover align-middle mb-0">
-            <thead class="table-light">
-                <tr>
-                    <th>Referans</th>
-                    <th>Çıkış</th>
-                    <th>Varış</th>
-                    <th>Plaka</th>
-                    <th>Durum</th>
-                    <th>İşlem</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                @if (Model.Count == 0)
-                {
-                    <tr>
-                        <td colspan="6"
-                            class="text-center text-muted py-4">
-                            Sevkiyat bulunamadı.
-                        </td>
-                    </tr>
-                }
-                else
-                {
-                    @foreach (var shipment in Model)
-                    {
-                        <tr>
-                            <td>@shipment.ReferenceNumber</td>
-                            <td>@shipment.Origin</td>
-                            <td>@shipment.Destination</td>
-                            <td>@shipment.VehiclePlate</td>
-
-                            <td>
-                                @switch (shipment.Status)
-                                {
-                                    case ShipmentStatus.Created:
-                                        <span class="badge bg-primary">
-                                            Oluşturuldu
-                                        </span>
-                                        break;
-
-                                    case ShipmentStatus.InTransit:
-                                        <span class="badge bg-warning text-dark">
-                                            Yolda
-                                        </span>
-                                        break;
-
-                                    case ShipmentStatus.Delivered:
-                                        <span class="badge bg-success">
-                                            Teslim edildi
-                                        </span>
-                                        break;
-                                }
-                            </td>
-
-                            <td>
-                                @if (shipment.Status == ShipmentStatus.Created)
-                                {
-                                    <form asp-controller="Shipments"
-                                          asp-action="ChangeStatus"
-                                          method="post">
-
-                                        <input type="hidden"
-                                               name="id"
-                                               value="@shipment.Id" />
-
-                                        <input type="hidden"
-                                               name="status"
-                                               value="InTransit" />
-
-                                        <button type="submit"
-                                                class="btn btn-sm btn-outline-warning">
-                                            Yola çıkar
-                                        </button>
-                                    </form>
-                                }
-                                else if (shipment.Status == ShipmentStatus.InTransit)
-                                {
-                                    <form asp-controller="Shipments"
-                                          asp-action="ChangeStatus"
-                                          method="post">
-
-                                        <input type="hidden"
-                                               name="id"
-                                               value="@shipment.Id" />
-
-                                        <input type="hidden"
-                                               name="status"
-                                               value="Delivered" />
-
-                                        <button type="submit"
-                                                class="btn btn-sm btn-outline-success">
-                                            Teslim et
-                                        </button>
-                                    </form>
-                                }
-                                else
-                                {
-                                    <span class="text-muted">
-                                        Tamamlandı
-                                    </span>
-                                }
-                            </td>
-                        </tr>
-                    }
-                }
-            </tbody>
-        </table>
-    </div>
+<div id="shipments-table"
+     data-table-url="@Url.Action("Table", "Shipments")"
+     data-hub-url="@Url.Content("~/hubs/shipments")">
+    <partial name="_ShipmentsTable" model="Model" />
 </div>
+<div id="shipments-live-status" class="text-muted small mt-2" role="status" aria-live="polite">Canlı güncelleme başlatılıyor…</div>
+
+@section Scripts {
+    <script src="~/lib/signalr/signalr.min.js" asp-append-version="true"></script>
+    <script src="~/js/shipments.js" asp-append-version="true"></script>
+}
